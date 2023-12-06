@@ -8,6 +8,7 @@ import sys
 import os
 import platform
 
+import math
 import tkinter as tk
 from tkinter import Menu, FALSE
 
@@ -77,6 +78,16 @@ class Calculadora(object):
             settings = json_load(f)
         
         return settings
+    
+    def _calculate_log(self):
+        try:
+            expression = self._entrada.get()
+            result = math.log10(eval(expression)) 
+            self._entrada.delete(0, tk.END)
+            self._entrada.insert(0, result)
+        except Exception:
+            self._entrada.delete(0, tk.END)
+            self._entrada.insert(0, 'Erro')
 
     def _get_theme(self, name='Dark'):
         """Retorna as configurações de estilo para o theme especificado."""
